@@ -1,0 +1,556 @@
+package application.views;
+
+import application.dao.AlternativeDao;
+import application.dao.CriteriaDao;
+import application.daoimpl.AlternativeDaoImpl;
+import application.daoimpl.CriteriaDaoImpl;
+import application.daoimpl.KaryawanDaoImpl;
+import application.models.AlternativeModel;
+import application.models.AlternativeModel;
+import application.models.CriteriaModel;
+import application.models.KaryawanModel;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import javax.swing.JRootPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import application.dao.KaryawanDao;
+
+/**
+ *
+ * @author mahasiswa unindra
+ */
+public class AddAlternativeDialog extends javax.swing.JDialog {
+
+    private final AlternativeDao alternativeDao;
+    private final KaryawanDao karyawanDao;
+    private final CriteriaDao criteriaDao;
+
+    int alternativeId = -1;
+
+    private final Map<String, Integer> karyawanMap = new HashMap<>();
+
+    private boolean isEdit() {
+        return alternativeId != -1;
+    }
+
+    /**
+     * Creates new form DialogTambahData
+     */
+    public AddAlternativeDialog(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        //add Panel, add panel(sebuah panel)
+        Pane.add(PanelKandidat);
+        Pane.repaint();
+        Pane.revalidate();
+        alternativeDao = new AlternativeDaoImpl();
+        karyawanDao = new KaryawanDaoImpl();
+        criteriaDao = new CriteriaDaoImpl();
+
+        loadData();
+
+        // Ensure proper sizing after all components are added
+        pack();
+        setLocationRelativeTo(parent);
+    }
+
+    public void setDataTabel(AlternativeModel data) {
+        
+        setSelectedProduct(data.getKaryawanId());
+
+        jSpinnerK1Score.setValue(data.getK1Score());
+        jSpinnerK2Score.setValue(data.getK2Score());
+        jSpinnerK3Score.setValue(data.getK3Score());
+        jSpinnerK4Score.setValue(data.getK4Score());
+        alternativeId = data.getId();
+    }
+
+    private void setSelectedProduct(int productId) {
+        // Iterate through the karyawanMap to find the display text for this productId
+        for (Map.Entry<String, Integer> entry : karyawanMap.entrySet()) {
+            if (entry.getValue().equals(productId)) {
+                cbKaryawan.setSelectedItem(entry.getKey());
+                return;
+            }
+        }
+        // If product not found, set to default
+        cbKaryawan.setSelectedIndex(0);
+    }
+
+    private void loadData() {
+        try {
+            final List<KaryawanModel> karyawan = karyawanDao.findAll();
+            final List<CriteriaModel> criterias = criteriaDao.findAll();
+
+            // Clear existing items and add default option
+            cbKaryawan.removeAllItems();
+            karyawanMap.clear();
+            cbKaryawan.addItem("Pilih Karyawan");
+
+            // Populate cbProduct with karyawan
+            for (KaryawanModel k : karyawan) {
+                String displayText = k.getId() + " - " + k.getNama();
+                cbKaryawan.addItem(displayText);
+                karyawanMap.put(displayText, k.getId());
+            }
+
+            // Update criteria labels based on criterias list
+            // Map criteria labels based on criteria code
+            for (CriteriaModel criteria : criterias) {
+                String code = criteria.getCode(); // Assuming CriteriaModel has getCode() method
+                String name = criteria.getName(); // Assuming CriteriaModel has getName() method
+
+                switch (code) {
+                    case "K1":
+                        jLabelk1.setText(name);
+                        break;
+                    case "K2":
+                        jLabelk2.setText(name);
+                        break;
+                    case "K3":
+                        jLabelk3.setText(name);
+                        break;
+                    case "K4":
+                        jLabelk4.setText(name);
+                        break;
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error loading data: " + e.getMessage());
+        }
+    }
+
+    public void setTitleFrame(String title) {
+        judul.setText(title);
+    }
+
+    protected void clearForm() {
+        cbKaryawan.setSelectedIndex(0);
+        jSpinnerK1Score.setValue(1);
+        jSpinnerK2Score.setValue(1);
+        jSpinnerK3Score.setValue(1);
+        jSpinnerK4Score.setValue(1);
+        alternativeId = -1;
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        btnG = new javax.swing.ButtonGroup();
+        PanelKandidat = new javax.swing.JPanel();
+        tombolEdit = new javax.swing.JLabel();
+        judul = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabelk1 = new javax.swing.JLabel();
+        jLabelk2 = new javax.swing.JLabel();
+        jLabelk3 = new javax.swing.JLabel();
+        jLabelk4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jSpinnerK1Score = new javax.swing.JSpinner();
+        jSpinnerK2Score = new javax.swing.JSpinner();
+        jSpinnerK3Score = new javax.swing.JSpinner();
+        jSpinnerK4Score = new javax.swing.JSpinner();
+        jLabel29 = new javax.swing.JLabel();
+        cbKaryawan = new javax.swing.JComboBox<>();
+        buttonAdd = new javax.swing.JLabel();
+        IsiKosong = new javax.swing.JOptionPane();
+        Pane = new javax.swing.JPanel();
+
+        PanelKandidat.setBackground(new java.awt.Color(250, 250, 250));
+
+        tombolEdit.setBackground(new java.awt.Color(255, 255, 255));
+        tombolEdit.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tombolEdit.setForeground(new java.awt.Color(0, 120, 218));
+        tombolEdit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tombolEdit.setText("Ubah Data");
+        tombolEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(202, 210, 226)));
+        tombolEdit.setOpaque(true);
+        tombolEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tombolEditMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tombolEditMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                tombolEditMouseExited(evt);
+            }
+        });
+
+        judul.setBackground(new java.awt.Color(213, 235, 255));
+        judul.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        judul.setForeground(new java.awt.Color(0, 120, 218));
+        judul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        judul.setText("Tambah Data Alternatif Karyawan");
+        judul.setOpaque(true);
+
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Penilaian Bobot Alternatif"));
+
+        jLabelk1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelk1.setText("Kriteria 1");
+
+        jLabelk2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelk2.setText("Kriteria 2");
+
+        jLabelk3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelk3.setText("Kriteria 3");
+
+        jLabelk4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelk4.setText("Kriteria 4");
+
+        jLabel1.setText("Bobot nilai alternatif berkisar 1 hingga 10 ");
+
+        jSpinnerK1Score.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+
+        jSpinnerK2Score.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+
+        jSpinnerK3Score.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+
+        jSpinnerK4Score.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel29.setText("Karyawan");
+
+        cbKaryawan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbKaryawanActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabelk4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSpinnerK4Score))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabelk3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSpinnerK3Score))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabelk2)
+                        .addGap(12, 12, 12)
+                        .addComponent(jSpinnerK2Score))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabelk1)
+                        .addGap(12, 12, 12)
+                        .addComponent(jSpinnerK1Score))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbKaryawan, 0, 350, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(cbKaryawan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelk1)
+                    .addComponent(jSpinnerK1Score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelk2)
+                    .addComponent(jSpinnerK2Score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelk3)
+                    .addComponent(jSpinnerK3Score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelk4)
+                    .addComponent(jSpinnerK4Score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(145, Short.MAX_VALUE))
+        );
+
+        buttonAdd.setBackground(new java.awt.Color(255, 255, 255));
+        buttonAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        buttonAdd.setForeground(new java.awt.Color(0, 120, 218));
+        buttonAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        buttonAdd.setText("Tambah Data");
+        buttonAdd.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(202, 210, 226)));
+        buttonAdd.setOpaque(true);
+        buttonAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonAddMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonAddMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonAddMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelKandidatLayout = new javax.swing.GroupLayout(PanelKandidat);
+        PanelKandidat.setLayout(PanelKandidatLayout);
+        PanelKandidatLayout.setHorizontalGroup(
+            PanelKandidatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(judul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(PanelKandidatLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelKandidatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelKandidatLayout.createSequentialGroup()
+                        .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tombolEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        PanelKandidatLayout.setVerticalGroup(
+            PanelKandidatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelKandidatLayout.createSequentialGroup()
+                .addComponent(judul, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(PanelKandidatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tombolEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        Pane.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        setSize(new java.awt.Dimension(888, 577));
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddMouseClicked
+        // TODO add your handling code here:
+        try {
+            if (isEdit()) {
+            } else if (cbKaryawan.getSelectedIndex() != 0
+                    && jSpinnerK1Score.getValue() != null
+                    && jSpinnerK2Score.getValue() != null
+                    && jSpinnerK3Score.getValue() != null
+                    && jSpinnerK4Score.getValue() != null) {
+                AlternativeModel newAlternative = new AlternativeModel();
+
+                String selectedItem = cbKaryawan.getSelectedItem().toString();
+                if (karyawanMap.containsKey(selectedItem)) {
+                    newAlternative.setKaryawanId(karyawanMap.get(selectedItem));
+                }
+
+                newAlternative.setK1Score((int) jSpinnerK1Score.getValue());
+                newAlternative.setK2Score((int) jSpinnerK2Score.getValue());
+                newAlternative.setK3Score((int) jSpinnerK3Score.getValue());
+                newAlternative.setK4Score((int) jSpinnerK4Score.getValue());
+
+                alternativeDao.insertOne(newAlternative);
+
+                this.clearForm();
+
+                this.dispose();
+            } else {
+                IsiKosong.showMessageDialog(rootPane, "Mohon isi semua kolom isian pada form !", "Error", ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal Menambah Data");
+        }
+    }//GEN-LAST:event_buttonAddMouseClicked
+
+    private void buttonAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddMouseEntered
+        // TODO add your handling code here:
+        buttonAdd.setBackground(new Color(250, 239, 245));
+        buttonAdd.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_buttonAddMouseEntered
+
+    private void buttonAddMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddMouseExited
+        // TODO add your handling code here:
+        buttonAdd.setBackground(Color.white);
+    }//GEN-LAST:event_buttonAddMouseExited
+
+    private void tombolEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tombolEditMouseClicked
+        // TODO add your handling code here:
+        try {
+            if (!isEdit()) {
+            } else if (cbKaryawan.getSelectedIndex() != 0
+                    && jSpinnerK1Score.getValue() != null
+                    && jSpinnerK2Score.getValue() != null
+                    && jSpinnerK3Score.getValue() != null
+                    && jSpinnerK4Score.getValue() != null) {
+                AlternativeModel newAlternative = new AlternativeModel();
+                newAlternative.setId(alternativeId);
+
+                String selectedItem = cbKaryawan.getSelectedItem().toString();
+                if (karyawanMap.containsKey(selectedItem)) {
+                    newAlternative.setKaryawanId(karyawanMap.get(selectedItem));
+                }
+                newAlternative.setK1Score((int) jSpinnerK1Score.getValue());
+                newAlternative.setK2Score((int) jSpinnerK2Score.getValue());
+                newAlternative.setK3Score((int) jSpinnerK3Score.getValue());
+                newAlternative.setK4Score((int) jSpinnerK4Score.getValue());
+
+                alternativeDao.update(newAlternative);
+
+                this.clearForm();
+
+                this.dispose();
+            } else {
+                IsiKosong.showMessageDialog(rootPane, "Mohon isi semua kolom isian pada form !", "Error", ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal Mengubah Data");
+        }
+    }//GEN-LAST:event_tombolEditMouseClicked
+
+    private void tombolEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tombolEditMouseEntered
+        // TODO add your handling code here:
+        tombolEdit.setBackground(new Color(250, 239, 245));
+        tombolEdit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_tombolEditMouseEntered
+
+    private void tombolEditMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tombolEditMouseExited
+        // TODO add your handling code here:
+        tombolEdit.setBackground(Color.white);
+    }//GEN-LAST:event_tombolEditMouseExited
+
+    private void cbKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKaryawanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbKaryawanActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AddAlternativeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AddAlternativeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AddAlternativeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AddAlternativeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                AddAlternativeDialog dialog = new AddAlternativeDialog(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JOptionPane IsiKosong;
+    private javax.swing.JPanel Pane;
+    private javax.swing.JPanel PanelKandidat;
+    private javax.swing.ButtonGroup btnG;
+    private javax.swing.JLabel buttonAdd;
+    private javax.swing.JComboBox<String> cbKaryawan;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabelk1;
+    private javax.swing.JLabel jLabelk2;
+    private javax.swing.JLabel jLabelk3;
+    private javax.swing.JLabel jLabelk4;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JSpinner jSpinnerK1Score;
+    private javax.swing.JSpinner jSpinnerK2Score;
+    private javax.swing.JSpinner jSpinnerK3Score;
+    private javax.swing.JSpinner jSpinnerK4Score;
+    private javax.swing.JLabel judul;
+    private javax.swing.JLabel tombolEdit;
+    // End of variables declaration//GEN-END:variables
+
+    void show(JRootPane rootPane) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+}

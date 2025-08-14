@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LaporanDataKriteria" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91ac4176-4759-4fea-b0e8-fe3aa68c9e3e">
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    
+    <style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <leftPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+            <rightPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <leftPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+            <rightPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <leftPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+            <rightPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+
+    <subDataset name="CriteriaData" uuid="0fccbe17-e08c-4f30-b9da-ab6b2afbb3f1">
+        <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+        <property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
+        <queryString language="SQL">
+            <![CDATA[SELECT ROW_NUMBER() OVER (ORDER BY code) as no, code, name, priority
+            FROM criterias 
+            ORDER BY code ASC]]>
+        </queryString>
+        <field name="no" class="java.lang.Long">
+            <property name="com.jaspersoft.studio.field.name" value="no"/>
+            <property name="com.jaspersoft.studio.field.label" value="no"/>
+        </field>
+        <field name="code" class="java.lang.String">
+            <property name="com.jaspersoft.studio.field.name" value="code"/>
+            <property name="com.jaspersoft.studio.field.label" value="code"/>
+            <property name="com.jaspersoft.studio.field.tree.path" value="criterias"/>
+        </field>
+        <field name="name" class="java.lang.String">
+            <property name="com.jaspersoft.studio.field.name" value="name"/>
+            <property name="com.jaspersoft.studio.field.label" value="name"/>
+            <property name="com.jaspersoft.studio.field.tree.path" value="criterias"/>
+        </field>
+        <field name="priority" class="java.lang.String">
+            <property name="com.jaspersoft.studio.field.name" value="priority"/>
+            <property name="com.jaspersoft.studio.field.label" value="priority"/>
+            <property name="com.jaspersoft.studio.field.tree.path" value="criterias"/>
+        </field>
+    </subDataset>
+
+    <parameter name="PATH" class="java.lang.String"/>
+    
+    <queryString language="SQL">
+        <![CDATA[SELECT 1 as dummy]]>
+    </queryString>
+    <field name="dummy" class="java.lang.Integer"/>
+
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+
+        <pageHeader>
+        <band height="80" splitType="Stretch">
+            <frame>
+                <reportElement style="Table_TD" mode="Opaque" x="-20" y="-20" width="595" height="100" uuid="ceb0c639-d790-4784-8344-4950ef69ff88"/>
+                <staticText>
+                    <reportElement x="142" y="10" width="350" height="30"  uuid="5a12aa99-6c42-400d-8229-3c2fffe5a011"/>
+                    <textElement textAlignment="Center">
+                        <font fontName="Times New Roman" size="20" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[SHOPEE EXPRESS CIRACAS]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="142" y="40" width="350" height="20"  uuid="5bd79f7a-72f1-4733-808c-c0db3d46fe9e"/>
+                    <textElement textAlignment="Center">
+                        <font fontName="Times New Roman"/>
+                    </textElement>
+                    <text><![CDATA[Jak, Jl. Raya Klp. Dua Wetan, RT.7/RW.4, Kelapa Dua Wetan, Ciracas, East Jakarta City, Jakarta 13730, Ciracas, Indonesia 13730]]></text>
+                </staticText>
+                <!--                <staticText>
+                    <reportElement x="142" y="60" width="350" height="20" forecolor="#FCFAFA" uuid="0ad0aacb-2522-4c4b-ab42-774d80e67304"/>
+                    <textElement textAlignment="Center">
+                        <font fontName="Times New Roman"/>
+                    </textElement>
+                    <text><![CDATA[Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12920]]></text>
+                </staticText>-->
+                <image>
+                    <reportElement x="40" y="25" width="75" height="75" uuid="23d5bb3f-e081-4190-9f1d-1a95495589ee"/>
+                    <imageExpression><![CDATA[$P{PATH}+"logo-company-200.png"]]></imageExpression>
+                </image>
+            </frame>
+        </band>
+    </pageHeader>
+
+    <columnHeader>
+        <band height="61" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="10" width="555" height="30" uuid="a2628f79-b65c-45b1-aa59-654c74d4954a"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Times New Roman" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Laporan Data Kriteria]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="200" splitType="Stretch">
+            <componentElement>
+                <reportElement x="0" y="10" width="555" height="180" uuid="4cbd44fa-22dc-4397-a155-65566013a66f">
+                    <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+                    <property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+                    <property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+                    <property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+                </reportElement>
+                <jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+                    <datasetRun subDataset="CriteriaData" uuid="1d544818-d0f6-4b03-a177-a6cb69097fe7">
+                        <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                    </datasetRun>
+                    
+                    <!-- Column No -->
+                    <jr:column width="50" uuid="b5e7519f-1d20-4173-941c-53194f0cf6bd">
+                        <jr:tableHeader style="Table_TH" height="30">
+                            <staticText>
+                                <reportElement x="0" y="0" width="50" height="30" uuid="755d4c1a-fb8b-440b-8bb9-0585a854cb18"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman" isBold="true"/>
+                                </textElement>
+                                <text><![CDATA[No]]></text>
+                            </staticText>
+                        </jr:tableHeader>
+                        <jr:detailCell style="Table_TD" height="30">
+                            <textField>
+                                <reportElement x="0" y="0" width="50" height="30" uuid="aac6f095-461d-4ef6-8fab-bc52c60dae7f"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+
+                    <!-- Column Kode Kriteria -->
+                    <jr:column width="100" uuid="5d2cf5bd-cc6b-4bf7-b1dd-45ef2bd3bad9">
+                        <jr:tableHeader style="Table_TH" height="30">
+                            <staticText>
+                                <reportElement x="0" y="0" width="100" height="30" uuid="5fc2ad96-6eba-448c-81e9-031fe0510ba1"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman" isBold="true"/>
+                                </textElement>
+                                <text><![CDATA[Kode Kriteria]]></text>
+                            </staticText>
+                        </jr:tableHeader>
+                        <jr:detailCell style="Table_TD" height="30">
+                            <textField>
+                                <reportElement x="0" y="0" width="100" height="30" uuid="2d59064e-2471-496c-9895-da9858e8d49c"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+
+                    <!-- Column Nama Kriteria -->
+                    <jr:column width="250" uuid="fc61c010-46b9-4ece-967c-682255b03488">
+                        <jr:tableHeader style="Table_TH" height="30">
+                            <staticText>
+                                <reportElement x="0" y="0" width="250" height="30" uuid="9b5599d2-84af-4437-8e48-1dad9992003d"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman" isBold="true"/>
+                                </textElement>
+                                <text><![CDATA[Nama Kriteria]]></text>
+                            </staticText>
+                        </jr:tableHeader>
+                        <jr:detailCell style="Table_TD" height="30">
+                            <textField>
+                                <reportElement x="0" y="0" width="250" height="30" uuid="5f4039a4-4b03-4d17-afe6-f5e7dd51391f"/>
+                                <textElement textAlignment="Left" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman"/>
+                                    <paragraph leftIndent="5"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+
+                    <!-- Column Prioritas Kepentingan -->
+                    <jr:column width="155" uuid="ab61c010-46b9-4ece-967c-682255b03499">
+                        <jr:tableHeader style="Table_TH" height="30">
+                            <staticText>
+                                <reportElement x="0" y="0" width="155" height="30" uuid="8b5599d2-84af-4437-8e48-1dad9992003d"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman" isBold="true"/>
+                                </textElement>
+                                <text><![CDATA[Prioritas Kepentingan]]></text>
+                            </staticText>
+                        </jr:tableHeader>
+                        <jr:detailCell style="Table_TD" height="30">
+                            <textField>
+                                <reportElement x="0" y="0" width="155" height="30" uuid="6f4039a4-4b03-4d17-afe6-f5e7dd51391f"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$F{priority}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+                </jr:table>
+            </componentElement>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="154" splitType="Stretch">
+            <textField pattern="MMMMM dd, yyyy">
+                <reportElement x="409" y="20" width="146" height="19" uuid="db19d70f-1b35-46f6-8292-7d0a6de3ade0"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Times New Roman"/>
+                    <paragraph rightIndent="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Jakarta, " + new java.text.SimpleDateFormat("EEEE dd MMMM yyyy", new java.util.Locale("id", "ID")).format(new java.util.Date())]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="50" width="555" height="19" uuid="af2fa45f-5d7d-49cd-9da3-748f27d2d425"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Times New Roman" isBold="true"/>
+                    <paragraph rightIndent="40"/>
+                </textElement>
+                <text><![CDATA[Admin]]></text>
+            </staticText>
+<!--            <staticText>
+                <reportElement x="462" y="130" width="83" height="24" uuid="b4080215-4129-4aa1-917c-a3ec3250936f"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman"/>
+                    <paragraph rightIndent="10"/>
+                </textElement>
+                <text><![CDATA[Pratama]]></text>
+            </staticText>-->
+        </band>
+    </pageFooter>
+</jasperReport>
