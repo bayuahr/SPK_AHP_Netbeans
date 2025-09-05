@@ -68,7 +68,7 @@ public class EvaluationDaoImpl implements EvaluationDao {
                 s.setId(resultSet.getInt("id"));
                 s.setKaryawan_id(resultSet.getInt("karyawan_id"));
                 s.setAdminId(resultSet.getInt("admin_id"));
-                s.setSelectionName(resultSet.getString("selection_name"));
+                s.setSelectionName(resultSet.getString("karyawan_id"));
                 s.setCreatedAt(resultSet.getTimestamp("created_at"));
                 s.setAdminId(resultSet.getInt("admin_id"));
 
