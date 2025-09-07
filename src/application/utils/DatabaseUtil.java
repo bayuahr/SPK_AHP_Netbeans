@@ -18,7 +18,7 @@ public class DatabaseUtil {
 
     private static Connection connection;
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3308/ahp_karyawan";
+    private static final String URL = "jdbc:mysql://localhost/ahp_karyawan";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
     private static final String MAX_POOL = "250";
