@@ -73,7 +73,7 @@ public class CalculationDialog extends javax.swing.JDialog {
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         this.setLocationRelativeTo(null);
 
-        //add Panel, add panel(sebuah panel)
+        // add Panel, add panel(sebuah panel)
         Pane.add(PanelPerhitungan);
         Pane.repaint();
         Pane.revalidate();
@@ -183,7 +183,6 @@ public class CalculationDialog extends javax.swing.JDialog {
                         throw new AssertionError();
                 }
             }
-            jListKriteria.setListData(listCriteria.toArray(new String[0]));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error loading data: " + e.getMessage());
@@ -195,20 +194,21 @@ public class CalculationDialog extends javax.swing.JDialog {
 
         jTable1.setModel(alternativeWeightTableModel);
 
-//        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(jTable1.getModel());
-//        jTable1.setRowSorter(sorter);
-//
-//        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
-//        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
-//        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-//        sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
-//        sorter.setSortKeys(sortKeys);
+        // TableRowSorter<TableModel> sorter = new
+        // TableRowSorter<TableModel>(jTable1.getModel());
+        // jTable1.setRowSorter(sorter);
+        //
+        // List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        // sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        // sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+        // sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
+        // sorter.setSortKeys(sortKeys);
         List<String> columnNames = new ArrayList<>();
         columnNames.add("Nama");
 
-//        if (this.totalCandidates > 3) {
-//            this.totalCandidates = 3;
-//        }
+        // if (this.totalCandidates > 3) {
+        // this.totalCandidates = 3;
+        // }
         MatrixTableModel matrixTableModel1 = new MatrixTableModel(columnNames, this.matrixComparisonKriteria1);
         jTableMatrixComparisonKriteria1.setModel(matrixTableModel1);
 
@@ -226,16 +226,20 @@ public class CalculationDialog extends javax.swing.JDialog {
 
         columnNamesTableComparisonNormalize.add("Bobot");
 
-        MatrixTableModel matrixTableModel5 = new MatrixTableModel(columnNamesTableComparisonNormalize, this.matrixComparisonNormalizeKriteria1);
+        MatrixTableModel matrixTableModel5 = new MatrixTableModel(columnNamesTableComparisonNormalize,
+                this.matrixComparisonNormalizeKriteria1);
         jTableMatrixComparisonNormalizeKriteria1.setModel(matrixTableModel5);
 
-        MatrixTableModel matrixTableModel6 = new MatrixTableModel(columnNamesTableComparisonNormalize, this.matrixComparisonNormalizeKriteria2);
+        MatrixTableModel matrixTableModel6 = new MatrixTableModel(columnNamesTableComparisonNormalize,
+                this.matrixComparisonNormalizeKriteria2);
         jTableMatrixComparisonNormalizeKriteria2.setModel(matrixTableModel6);
 
-        MatrixTableModel matrixTableModel7 = new MatrixTableModel(columnNamesTableComparisonNormalize, this.matrixComparisonNormalizeKriteria3);
+        MatrixTableModel matrixTableModel7 = new MatrixTableModel(columnNamesTableComparisonNormalize,
+                this.matrixComparisonNormalizeKriteria3);
         jTableMatrixComparisonNormalizeKriteria3.setModel(matrixTableModel7);
 
-        MatrixTableModel matrixTableModel8 = new MatrixTableModel(columnNamesTableComparisonNormalize, this.matrixComparisonNormalizeKriteria4);
+        MatrixTableModel matrixTableModel8 = new MatrixTableModel(columnNamesTableComparisonNormalize,
+                this.matrixComparisonNormalizeKriteria4);
         jTableMatrixComparisonNormalizeKriteria4.setModel(matrixTableModel8);
     }
 
@@ -280,46 +284,8 @@ public class CalculationDialog extends javax.swing.JDialog {
                 }
             }
 
-            System.out.println("=== Criterias Matrix ===");
-            for (int row = 0; row < 4; row++) {
-                switch (row) {
-                    case 0:
-                        System.out.print("Leadership\t: ");
-                        break;
-                    case 1:
-                        System.out.print("Knowledge\t: ");
-                        break;
-                    case 2:
-                        System.out.print("TechnicalSkill\t: ");
-                        break;
-                    default:
-                        System.out.print("AdvancedSkill\t: ");
-                        break;
-                }
-
-                for (int col = 0; col < size; col++) {
-                    System.out.print(criterias[row][col] + "\t");
-                }
-                System.out.println();
-            }
-
             System.out.println("\n[#" + "LOOP ALTERNATIF TERHADAP MASING-MASING KRITERIA" + "]");
             for (int criteria = 0; criteria < criterias.length; criteria++) {
-
-                switch (criteria) {
-                    case 0:
-                        System.out.println("Perhitungan Alternatif Terhadap Masing-masing Kriteria Nilai Kepemimpinan");
-                        break;
-                    case 1:
-                        System.out.println("Perhitungan Alternatif Terhadap Masing-masing Kriteria Nilai Pengetahuan");
-                        break;
-                    case 2:
-                        System.out.println("Perhitungan Alternatif Terhadap Masing-masing Kriteria Nilai Kemampuan Teknis");
-                        break;
-                    default:
-                        System.out.println("Perhitungan Alternatif Terhadap Masing-masing Kriteria Nilai Kemampuan Lanjutan");
-                        break;
-                }
 
                 int[] scores = criterias[criteria];
 
@@ -382,7 +348,8 @@ public class CalculationDialog extends javax.swing.JDialog {
                 // Calculate the normalized matrix and column sums
                 for (int row = 0; row < alternativeScoreMatrix.length; row++) {
                     for (int col = 0; col < alternativeScoreMatrix.length; col++) {
-                        normalizedAlternativeScoreMatrix[row][col] = alternativeScoreMatrix[row][col] / totalColumnAlternativeScoreMatrix[col];
+                        normalizedAlternativeScoreMatrix[row][col] = alternativeScoreMatrix[row][col]
+                                / totalColumnAlternativeScoreMatrix[col];
                         normalizedAlternativeScoreMatrixSum[row] += normalizedAlternativeScoreMatrix[row][col];
                         priorityVector[row] = normalizedAlternativeScoreMatrixSum[row] / size; // atau rata-rata
                     }
@@ -501,9 +468,6 @@ public class CalculationDialog extends javax.swing.JDialog {
                 AlternativeModel alt = alternatives.get(i);
                 alternativeNames[i] = (i + 1) + "). ";
             }
-            jListAlternative.setListData(alternativeNames);
-        } else {
-            jListAlternative.setListData(new String[]{"Tidak ada alternatif ditemukan"});
         }
     }
 
@@ -538,8 +502,8 @@ public class CalculationDialog extends javax.swing.JDialog {
         model8.clearData(this.defaultColumnNamesTableComparisonNormalize);
 
         // Optionally, clear the sorter
-        //        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-        //        jTable1.setRowSorter(sorter);
+        // TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
+        // jTable1.setRowSorter(sorter);
         k1k1.setText("");
         k1k2.setText("");
         k1k3.setText("");
@@ -595,6 +559,7 @@ public class CalculationDialog extends javax.swing.JDialog {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -716,12 +681,6 @@ public class CalculationDialog extends javax.swing.JDialog {
         jLabel34 = new javax.swing.JLabel();
         jLabelSelectProduct = new javax.swing.JLabel();
         jComboBoxProduct = new javax.swing.JComboBox<>();
-        jLabel22 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jListKriteria = new javax.swing.JList<>();
-        jLabel24 = new javax.swing.JLabel();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        jListAlternative = new javax.swing.JList<>();
         Pane = new javax.swing.JPanel();
 
         PanelPerhitungan.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -942,7 +901,7 @@ public class CalculationDialog extends javax.swing.JDialog {
                         .addComponent(k3k4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(k4k4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jLabel11.setText("2. Matriks Normalisasi");
@@ -1350,7 +1309,7 @@ public class CalculationDialog extends javax.swing.JDialog {
                             .addComponent(jLabel48)
                             .addComponent(jLabel49)
                             .addComponent(jLabel50))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ciValue1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                             .addComponent(nCriteria)
@@ -1410,9 +1369,9 @@ public class CalculationDialog extends javax.swing.JDialog {
         ));
         jScrollPane3.setViewportView(jTableMatrixComparisonKriteria4);
 
-        jLabelComparisonKriteria2.setText("Kriteria Pengetahuan");
+        jLabelComparisonKriteria2.setText("Kriteria 2");
 
-        jLabelComparisonKriteria1.setText("Kriteria Kepemimpinan");
+        jLabelComparisonKriteria1.setText("Kriteria 1");
 
         jTableMatrixComparisonKriteria1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1427,7 +1386,7 @@ public class CalculationDialog extends javax.swing.JDialog {
         ));
         jScrollPane4.setViewportView(jTableMatrixComparisonKriteria1);
 
-        jLabelComparisonKriteria3.setText("Kriteria Kemampuan Teknis");
+        jLabelComparisonKriteria3.setText("Kriteria 3");
 
         jTableMatrixComparisonKriteria2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1442,7 +1401,7 @@ public class CalculationDialog extends javax.swing.JDialog {
         ));
         jScrollPane5.setViewportView(jTableMatrixComparisonKriteria2);
 
-        jLabelComparisonKriteria4.setText("Kriteria Kemampuan Lanjutan");
+        jLabelComparisonKriteria4.setText("Kriteria 4");
 
         jTableMatrixComparisonKriteria3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1459,9 +1418,9 @@ public class CalculationDialog extends javax.swing.JDialog {
 
         jLabel27.setText("6. Matriks Bobot Alternatif terhadap Kriteria");
 
-        jLabelWeightKriteria1.setText("Kriteria Kepemimpinan");
+        jLabelWeightKriteria1.setText("Kriteria 1");
 
-        jLabelWeightKriteria2.setText("Kriteria Pengetahuan");
+        jLabelWeightKriteria2.setText("Kriteria 2");
 
         jTableMatrixComparisonNormalizeKriteria1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1476,7 +1435,7 @@ public class CalculationDialog extends javax.swing.JDialog {
         ));
         jScrollPane8.setViewportView(jTableMatrixComparisonNormalizeKriteria1);
 
-        jLabelWeightKriteria3.setText("Kriteria Kemampuan Teknis");
+        jLabelWeightKriteria3.setText("Kriteria 3");
 
         jTableMatrixComparisonNormalizeKriteria3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1491,7 +1450,7 @@ public class CalculationDialog extends javax.swing.JDialog {
         ));
         jScrollPane9.setViewportView(jTableMatrixComparisonNormalizeKriteria3);
 
-        jLabelWeightKriteria4.setText("Kriteria Kemampuan Lanjutan");
+        jLabelWeightKriteria4.setText("Kriteria 4");
 
         jTableMatrixComparisonNormalizeKriteria4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1521,32 +1480,14 @@ public class CalculationDialog extends javax.swing.JDialog {
 
         jLabel34.setText("7. Hasil Akhir");
 
-        jLabelSelectProduct.setText("Pilih Karyawan");
+        jLabelSelectProduct.setText("Pilih");
 
-        jComboBoxProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Karyawan" }));
+        jComboBoxProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih" }));
         jComboBoxProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxProductActionPerformed(evt);
             }
         });
-
-        jLabel22.setText("List Kriteria");
-
-        jListKriteria.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Kriteria 1", "Kriteria 2" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane6.setViewportView(jListKriteria);
-
-        jLabel24.setText("List Alternatif");
-
-        jListAlternative.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Alternatif 1", "Alternatif 2" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane13.setViewportView(jListAlternative);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1555,100 +1496,80 @@ public class CalculationDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelSelectProduct)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jScrollPane6)
-                                    .addComponent(jComboBoxProduct, 0, 345, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel24)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane13)))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabelSelectProduct)
+                                .addComponent(jComboBoxProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(mulaiHitung, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Simpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18))
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(mulaiHitung, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel34)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelComparisonKriteria2)
-                            .addComponent(jLabelComparisonKriteria1)
-                            .addComponent(jLabelComparisonKriteria3)
-                            .addComponent(jLabelComparisonKriteria4)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelWeightKriteria2)
-                            .addComponent(jLabelWeightKriteria1)
-                            .addComponent(jLabelWeightKriteria3)
-                            .addComponent(jLabelWeightKriteria4)
-                            .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jLabelComparisonKriteria2)
+                    .addComponent(jLabelComparisonKriteria1)
+                    .addComponent(jLabelComparisonKriteria3)
+                    .addComponent(jLabelComparisonKriteria4)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelWeightKriteria2)
+                    .addComponent(jLabelWeightKriteria1)
+                    .addComponent(jLabelWeightKriteria3)
+                    .addComponent(jLabelWeightKriteria4)
+                    .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Simpan, mulaiHitung});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelSelectProduct)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBoxProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mulaiHitung, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mulaiHitung, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
@@ -1688,12 +1609,8 @@ public class CalculationDialog extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelComparisonKriteria4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel34)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(249, 249, 249))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Simpan, mulaiHitung});
@@ -1739,45 +1656,78 @@ public class CalculationDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lambdaMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lambdaMaxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lambdaMaxActionPerformed
+    private void jComboBoxProductActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBoxProductActionPerformed
+        try {
+            // Ambil item terpilih
+            Object selectedItemObj = jComboBoxProduct.getSelectedItem();
 
-    private void ciValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciValue1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ciValue1ActionPerformed
+            // Jika belum ada pilihan, jangan lanjut
+            if (selectedItemObj == null) {
+                return; // langsung keluar agar tidak invoke null
+            }
 
-    private void nCriteriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nCriteriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nCriteriaActionPerformed
+            String selectedItem = selectedItemObj.toString();
 
-    private void ciValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciValueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ciValueActionPerformed
+            // Pastikan bukan pilihan default
+            if (!selectedItem.equals("Pilih Karyawan -") && productMap.containsKey(selectedItem)) {
+                // Ambil productId
+                int productId = productMap.get(selectedItem);
 
-    private void crValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crValueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_crValueActionPerformed
+                // Ambil data alternatif dari DB
+                List<AlternativeModel> alternatives = alternativeDao.findByProductId(productId);
 
-    private void irValuesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irValuesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_irValuesActionPerformed
+                // Update tampilan
+                updateAlternativeList(alternatives);
 
-    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+                // Optional: reset hasil perhitungan
+                clearCalculationResults();
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error loading alternatives: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }// GEN-LAST:event_jComboBoxProductActionPerformed
+
+    private void lambdaMaxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_lambdaMaxActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_lambdaMaxActionPerformed
+
+    private void ciValue1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ciValue1ActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_ciValue1ActionPerformed
+
+    private void nCriteriaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_nCriteriaActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_nCriteriaActionPerformed
+
+    private void ciValueActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ciValueActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_ciValueActionPerformed
+
+    private void crValueActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_crValueActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_crValueActionPerformed
+
+    private void irValuesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_irValuesActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_irValuesActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_resetActionPerformed
         clearCalculationResults();
         loadData();
-    }//GEN-LAST:event_resetActionPerformed
+    }// GEN-LAST:event_resetActionPerformed
 
-    private void resetMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetMouseExited
+    private void resetMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_resetMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_resetMouseExited
+    }// GEN-LAST:event_resetMouseExited
 
-    private void resetMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetMouseEntered
+    private void resetMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_resetMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_resetMouseEntered
+    }// GEN-LAST:event_resetMouseEntered
 
-    //simpan data
-    private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimpanActionPerformed
+    // simpan data
+    private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_SimpanActionPerformed
         // Check if product is selected
         if (jComboBoxProduct.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Pilih Karyawan terlebih dahulu.");
@@ -1785,7 +1735,8 @@ public class CalculationDialog extends javax.swing.JDialog {
         }
 
         if (this.alternativeWeightModel == null || this.alternativeWeightModel.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Data bobot alternatif belum tersedia. Silakan lakukan perhitungan terlebih dahulu.");
+            JOptionPane.showMessageDialog(null,
+                    "Data bobot alternatif belum tersedia. Silakan lakukan perhitungan terlebih dahulu.");
             return;
         }
 
@@ -1800,7 +1751,6 @@ public class CalculationDialog extends javax.swing.JDialog {
             EvaluationModel evaluation = new EvaluationModel();
             evaluation.setKaryawan_id(productId);
             evaluation.setAdminId(1); // Assuming admin ID 1, adjust as needed
-            evaluation.setSelectionName("Perhitungan - " + selectedItem);
             evaluation.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
 
             int evaluationId = evaluationDao.insertOne(evaluation);
@@ -1819,7 +1769,8 @@ public class CalculationDialog extends javax.swing.JDialog {
             // Step 3: Save ranking results to ResultDao
             for (int i = 0; i < sortedAlternatives.size(); i++) {
                 AlternativeWeight2Model item = sortedAlternatives.get(i);
-                System.out.println("Processing ranked item " + (i + 1) + ": id=" + item.getId() + " weight=" + item.getWeight());
+                System.out.println(
+                        "Processing ranked item " + (i + 1) + ": id=" + item.getId() + " weight=" + item.getWeight());
 
                 ResultModel result = new ResultModel();
                 result.setEvaluationId(evaluationId);
@@ -1836,7 +1787,8 @@ public class CalculationDialog extends javax.swing.JDialog {
                     int resultInsert = resultDao.insertOne(result);
                     System.out.println("Insert result for alternative id " + item.getId() + ": " + resultInsert);
                 } catch (Exception e) {
-                    System.err.println("Error inserting result for alternative id " + item.getId() + ": " + e.getMessage());
+                    System.err.println(
+                            "Error inserting result for alternative id " + item.getId() + ": " + e.getMessage());
                     e.printStackTrace();
                 }
 
@@ -1851,19 +1803,19 @@ public class CalculationDialog extends javax.swing.JDialog {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Data Gagal Disimpan: " + e.getMessage());
         }
-    }//GEN-LAST:event_SimpanActionPerformed
+    }// GEN-LAST:event_SimpanActionPerformed
 
-    private void SimpanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SimpanMouseExited
+    private void SimpanMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_SimpanMouseExited
         // TODO add your handling code here:
         Simpan.setBackground(Color.white);
-    }//GEN-LAST:event_SimpanMouseExited
+    }// GEN-LAST:event_SimpanMouseExited
 
-    private void SimpanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SimpanMouseEntered
+    private void SimpanMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_SimpanMouseEntered
         // TODO add your handling code here:
         Simpan.setBackground(new Color(250, 239, 245));
-    }//GEN-LAST:event_SimpanMouseEntered
+    }// GEN-LAST:event_SimpanMouseEntered
 
-    private void mulaiHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mulaiHitungActionPerformed
+    private void mulaiHitungActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_mulaiHitungActionPerformed
         try {
 
             if (jComboBoxProduct.getSelectedIndex() == 0) {
@@ -1930,63 +1882,30 @@ public class CalculationDialog extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    }//GEN-LAST:event_mulaiHitungActionPerformed
+    }// GEN-LAST:event_mulaiHitungActionPerformed
 
-    private void mulaiHitungMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mulaiHitungMouseExited
+    private void mulaiHitungMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_mulaiHitungMouseExited
         // TODO add your handling code here:
         mulaiHitung.setBackground(Color.white);
-    }//GEN-LAST:event_mulaiHitungMouseExited
+    }// GEN-LAST:event_mulaiHitungMouseExited
 
-    private void mulaiHitungMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mulaiHitungMouseEntered
+    private void mulaiHitungMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_mulaiHitungMouseEntered
         // TODO add your handling code here:
         mulaiHitung.setBackground(new Color(250, 239, 245));
-    }//GEN-LAST:event_mulaiHitungMouseEntered
-
-    private void jComboBoxProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProductActionPerformed
-        try {
-            // Check if selected item is null first
-            Object selectedItemObj = jComboBoxProduct.getSelectedItem();
-            if (selectedItemObj == null) {
-                // Clear alternative list if nothing is selected
-                jListAlternative.setListData(new String[0]);
-                return;
-            }
-
-            String selectedItem = selectedItemObj.toString();
-
-            // Check if a valid product is selected (not the default option)
-            if (!selectedItem.equals("Pilih Karyawan -") && productMap.containsKey(selectedItem)) {
-                // Get the product ID from the productMap
-                int productId = productMap.get(selectedItem);
-
-                // Load alternatives for the selected product
-                List<AlternativeModel> alternatives = alternativeDao.findByProductId(productId);
-
-                // Update the alternative list display
-                updateAlternativeList(alternatives);
-
-                // Optional: Clear previous calculation results
-                clearCalculationResults();
-
-            } else {
-                // Clear alternative list if no valid product selected
-                jListAlternative.setListData(new String[0]);
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error loading alternatives: " + e.getMessage());
-            e.printStackTrace(); // Add this for debugging
-        }
-    }//GEN-LAST:event_jComboBoxProductActionPerformed
+    }// GEN-LAST:event_mulaiHitungMouseEntered
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -2012,38 +1931,38 @@ public class CalculationDialog extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(CalculationDialog.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
+        // </editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -2088,8 +2007,6 @@ public class CalculationDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -2121,8 +2038,6 @@ public class CalculationDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelWeightKriteria2;
     private javax.swing.JLabel jLabelWeightKriteria3;
     private javax.swing.JLabel jLabelWeightKriteria4;
-    private javax.swing.JList<String> jListAlternative;
-    private javax.swing.JList<String> jListKriteria;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -2131,12 +2046,10 @@ public class CalculationDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
@@ -2189,6 +2102,7 @@ public class CalculationDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     void show(JRootPane rootPane) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 }

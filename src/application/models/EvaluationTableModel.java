@@ -29,14 +29,12 @@ public class EvaluationTableModel extends AbstractTableModel {
             case 1:
                 return "Seleksi ID";
             case 2:
-                return "Nama Seleksi";
-            case 3:
                 return "Nama Karyawan";
-            case 4:
+            case 3:
                 return "Kode Karyawan";
-            case 5:
+            case 4:
                 return "Admin Id";
-            case 6:
+            case 5:
                 return "Dibuat Pada";
             default:
                 return null;
@@ -52,14 +50,12 @@ public class EvaluationTableModel extends AbstractTableModel {
             case 1:
                 return sel.getId();
             case 2:
-                return sel.getSelectionName();
-            case 3:
                 return sel.getKaryawan().getNama() != null ? sel.getKaryawan().getNama() : "-";
-            case 4:
+            case 3:
                 return String.valueOf(sel.getKaryawan_id()) != null ? sel.getKaryawan_id() : "-";
-            case 5:
+            case 4:
                 return sel.getAdminId();
-            case 6:
+            case 5:
                 return sel.getCreatedAt();
             default:
                 return null;

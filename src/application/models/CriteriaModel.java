@@ -9,7 +9,7 @@ package application.models;
  * @author mahasiswa unindra 
  */
 public class CriteriaModel {
-        private String code;
+    private String code;
     private String name;
     private String priority;
 

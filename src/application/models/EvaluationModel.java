@@ -7,7 +7,6 @@ public class EvaluationModel {
     private int id;
     private int karyawan_id;
     private int adminId;
-    private String selectionName;
     private Timestamp createdAt;
     private KaryawanModel karyawan;
 
@@ -22,11 +21,10 @@ public class EvaluationModel {
     public EvaluationModel() {
     }
 
-    public EvaluationModel(int id, int karyawan_id, int adminId, String selectionName, Timestamp createdAt,KaryawanModel karyawan) {
+    public EvaluationModel(int id, int karyawan_id, int adminId,Timestamp createdAt,KaryawanModel karyawan) {
         this.id = id;
         this.karyawan_id = karyawan_id;
         this.adminId = adminId;
-        this.selectionName = selectionName;
         this.createdAt = createdAt;
         this.karyawan = karyawan;
     }
@@ -43,10 +41,6 @@ public class EvaluationModel {
         this.adminId = adminId;
     }
 
-    public void setSelectionName(String selectionName) {
-        this.selectionName = selectionName;
-    }
-
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
@@ -61,10 +55,6 @@ public class EvaluationModel {
 
     public int getAdminId() {
         return adminId;
-    }
-
-    public String getSelectionName() {
-        return selectionName;
     }
 
     public Timestamp getCreatedAt() {

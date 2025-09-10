@@ -216,7 +216,8 @@ public class AddAlternativeDialog extends javax.swing.JDialog {
         jLabelk4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelk4.setText("Kriteria 4");
 
-        jLabel1.setText("Bobot nilai alternatif berkisar 1 hingga 10 ");
+        jLabel1.setText("<html>\n<p>Bobot nilai alternatif berkisar 1 hingga 5</p>\n<p>1 : Sangat Buruk</p>\n<p>2 : Buruk</p>\n<p>3 : Cukup</p>\n<p>4 : Baik</p>\n<p>5 : Sangat Baik</p>\n</html>"); // NOI18N
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jSpinnerK1Score.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
 
@@ -259,12 +260,12 @@ public class AddAlternativeDialog extends javax.swing.JDialog {
                         .addGap(12, 12, 12)
                         .addComponent(jSpinnerK1Score))
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel29)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbKaryawan, 0, 350, Short.MAX_VALUE)))
+                        .addComponent(cbKaryawan, 0, 445, Short.MAX_VALUE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -291,8 +292,7 @@ public class AddAlternativeDialog extends javax.swing.JDialog {
                     .addComponent(jLabelk4)
                     .addComponent(jSpinnerK4Score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
         );
 
         buttonAdd.setBackground(new java.awt.Color(255, 255, 255));

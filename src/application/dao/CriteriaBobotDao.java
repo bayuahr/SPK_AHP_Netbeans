@@ -4,6 +4,7 @@
  */
 package application.dao;
 
+import application.models.CriteriaBobotModel;
 import application.models.CriteriaModel;
 import java.util.List;
 
@@ -11,10 +12,8 @@ import java.util.List;
  *
  * @author mahasiswa unindra 
  */
-public interface CriteriaDao {
-    public int insertOne(CriteriaModel criteria);
-    public List<CriteriaModel> findAll();
-    public List<String> findColumns();
-    public int update(CriteriaModel criteria);
-    public int delete(int id);
+public interface CriteriaBobotDao {
+    public int insertOne(CriteriaBobotModel criteria);
+    public List<CriteriaBobotModel> findAll();
+    public int update(CriteriaBobotModel criteria);
 }

@@ -4,8 +4,11 @@
  */
 package application.views;
 
+import application.dao.CriteriaBobotDao;
 import application.dao.CriteriaDao;
+import application.daoimpl.CriteriaBobotDaoImpl;
 import application.daoimpl.CriteriaDaoImpl;
+import application.models.CriteriaBobotModel;
 import application.models.CriteriaModel;
 import application.models.CriteriaTableModel;
 import java.sql.PreparedStatement;
@@ -26,6 +29,7 @@ import java.awt.Color;
  */
 public class CriteriaData extends javax.swing.JPanel {
 
+    private final CriteriaBobotDao criteriaBobotDao;
     private final CriteriaDao criteriaDao;
     private String code;
 
@@ -34,41 +38,34 @@ public class CriteriaData extends javax.swing.JPanel {
      */
     public CriteriaData() {
         initComponents();
+        this.criteriaBobotDao = new CriteriaBobotDaoImpl();
         this.criteriaDao = new CriteriaDaoImpl();
         this.loadTable();
         this.loadData();
         buttonSave.setBackground(Color.white);
-        buttonEdit.setBackground(Color.white);
     }
 
     private void loadData() {
-        final String[] criterias = {"Kedisiplinan Waktu","Produktivitas Kerja","Kualitas Kerja & Ketelitian","Kerjasama Tim & Sikap Kerja"};
+        final String[] criterias = {"K1 - Kepatuhan Prosedur & SOP", "K2 - Kuantitas Kerja", "K3 - Kualitas Kerja", "K4 - Disiplin"};
         // Clear existing items and add default option for all combo boxes
         comboBoxCriteria1.removeAllItems();
         comboBoxCriteria2.removeAllItems();
-        comboBoxCriteria3.removeAllItems();
-        comboBoxCriteria4.removeAllItems();
 
         // Add default option
         comboBoxCriteria1.addItem("Pilih Kriteria -");
         comboBoxCriteria2.addItem("Pilih Kriteria -");
-        comboBoxCriteria3.addItem("Pilih Kriteria -");
-        comboBoxCriteria4.addItem("Pilih Kriteria -");
 
         // Populate all combo boxes with criterias array
         for (String criteria : criterias) {
             comboBoxCriteria1.addItem(criteria);
             comboBoxCriteria2.addItem(criteria);
-            comboBoxCriteria3.addItem(criteria);
-            comboBoxCriteria4.addItem(criteria);
         }
     }
 
     protected void clearForm() {
         comboBoxCriteria1.setSelectedIndex(0);
         comboBoxCriteria2.setSelectedIndex(0);
-        comboBoxCriteria3.setSelectedIndex(0);
-        comboBoxCriteria4.setSelectedIndex(0);
+        comboBoxBobot.setSelectedIndex(0);
     }
 
     private void getDataTabel() {
@@ -81,19 +78,19 @@ public class CriteriaData extends javax.swing.JPanel {
     }
 
     public void loadTable() {
-        List<CriteriaModel> criteria = this.criteriaDao.findAll();
-        CriteriaTableModel criteriaTableModel = new CriteriaTableModel(criteria);
+        List<CriteriaBobotModel> criteria = this.criteriaBobotDao.findAll();
+        List<String> allCriteria = this.criteriaDao.findColumns();
+        CriteriaTableModel criteriaTableModel = new CriteriaTableModel(allCriteria, criteria);
 
         tableCriteria.setModel(criteriaTableModel);
 
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableCriteria.getModel());
-        tableCriteria.setRowSorter(sorter);
-
-        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
-        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
-        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-        sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
-        sorter.setSortKeys(sortKeys);
+//        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableCriteria.getModel());
+//        tableCriteria.setRowSorter(sorter);
+//
+//        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+//        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+//        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+//        sorter.setSortKeys(sortKeys);
     }
 
     /**
@@ -109,20 +106,15 @@ public class CriteriaData extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCriteria = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         buttonSave = new javax.swing.JButton();
-        buttonEdit = new javax.swing.JButton();
-        buttonDelete = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         comboBoxCriteria1 = new javax.swing.JComboBox<>();
         comboBoxCriteria2 = new javax.swing.JComboBox<>();
-        comboBoxCriteria3 = new javax.swing.JComboBox<>();
-        comboBoxCriteria4 = new javax.swing.JComboBox<>();
+        comboBoxBobot = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(245, 247, 250));
 
@@ -156,19 +148,13 @@ public class CriteriaData extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tableCriteria);
 
-        jLabel1.setText("Catatan : Ubah atau Hapus, klik data pada tabel terlebih dahulu");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -176,8 +162,6 @@ public class CriteriaData extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -201,64 +185,23 @@ public class CriteriaData extends javax.swing.JPanel {
             }
         });
 
-        buttonEdit.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        buttonEdit.setForeground(new java.awt.Color(0, 120, 218));
-        buttonEdit.setText("Ubah");
-        buttonEdit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(202, 210, 226)));
-        buttonEdit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonEditMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonEditMouseExited(evt);
-            }
-        });
-        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEditActionPerformed(evt);
-            }
-        });
-
-        buttonDelete.setFont(new java.awt.Font("Liberation Sans", 1, 13)); // NOI18N
-        buttonDelete.setForeground(new java.awt.Color(204, 0, 51));
-        buttonDelete.setText("Hapus");
-        buttonDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        buttonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonDeleteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonDeleteMouseExited(evt);
-            }
-        });
-        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonDeleteActionPerformed(evt);
-            }
-        });
-
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Prioritas Kepentingan dari Kriteria"));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setText("Kriteria Sangat Penting ke-1");
+        jLabel8.setText("Kriteria 1");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setText("Kriteria penting ke-2");
+        jLabel11.setText("Kriteria 2");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setText("Kriteria cukup penting ke-3");
+        jLabel12.setText("Bobot");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel13.setText("Kriteria biasa ke-4");
+        comboBoxCriteria1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Kriteria -", "Kepatuhan Prosedur & SOP", "Kuantitas Kerja", "Kualitas Kerja", "Disiplin" }));
 
-        comboBoxCriteria1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Kriteria -", "Kedisiplinan Waktu", "Produktivitas Kerja", "Kualitas Kerja & Ketelitian", "Kerjasama Tim & Sikap Kerja" }));
+        comboBoxCriteria2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Kriteria -", "Kepatuhan Prosedur & SOP", "Kuantitas Kerja", "Kualitas Kerja", "Disiplin" }));
 
-        comboBoxCriteria2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Kriteria -", "Kedisiplinan Waktu", "Produktivitas Kerja", "Kualitas Kerja & Ketelitian", "Kerjasama Tim & Sikap Kerja" }));
-
-        comboBoxCriteria3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Kriteria -", "Kedisiplinan Waktu", "Produktivitas Kerja", "Kualitas Kerja & Ketelitian", "Kerjasama Tim & Sikap Kerja" }));
-
-        comboBoxCriteria4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Kriteria -", "Kedisiplinan Waktu", "Produktivitas Kerja", "Kualitas Kerja & Ketelitian", "Kerjasama Tim & Sikap Kerja" }));
+        comboBoxBobot.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -268,13 +211,11 @@ public class CriteriaData extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel13)
                     .addComponent(jLabel12)
                     .addComponent(jLabel8))
-                .addGap(44, 44, 44)
+                .addGap(93, 93, 93)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(comboBoxCriteria4, javax.swing.GroupLayout.Alignment.LEADING, 0, 266, Short.MAX_VALUE)
-                    .addComponent(comboBoxCriteria3, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboBoxBobot, javax.swing.GroupLayout.Alignment.LEADING, 0, 266, Short.MAX_VALUE)
                     .addComponent(comboBoxCriteria2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comboBoxCriteria1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -292,13 +233,9 @@ public class CriteriaData extends javax.swing.JPanel {
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxCriteria3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxBobot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxCriteria4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -307,13 +244,8 @@ public class CriteriaData extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -322,13 +254,9 @@ public class CriteriaData extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -365,46 +293,19 @@ public class CriteriaData extends javax.swing.JPanel {
         try {
             int n = 1;
 
-            if (comboBoxCriteria1.getSelectedIndex() != 0 && comboBoxCriteria2.getSelectedIndex() != 0
-                    && comboBoxCriteria3.getSelectedIndex() != 0 && comboBoxCriteria4.getSelectedIndex() != 0) {
+            if (comboBoxCriteria1.getSelectedIndex() != 0 && comboBoxCriteria2.getSelectedIndex() != 0) {
                 // Validasi untuk memastikan tidak ada kriteria yang sama
-                String criteria1 = comboBoxCriteria1.getSelectedItem().toString();
-                String criteria2 = comboBoxCriteria2.getSelectedItem().toString();
-                String criteria3 = comboBoxCriteria3.getSelectedItem().toString();
-                String criteria4 = comboBoxCriteria4.getSelectedItem().toString();
+                String criteria1 = "K" + comboBoxCriteria1.getSelectedIndex();
+                String criteria2 = "K" + comboBoxCriteria2.getSelectedIndex();
+                double bobot = Double.parseDouble(comboBoxBobot.getSelectedItem().toString());
 
-                // Cek duplikasi
-                if (criteria1.equals(criteria2) || criteria1.equals(criteria3) || criteria1.equals(criteria4)
-                        || criteria2.equals(criteria3) || criteria2.equals(criteria4) || criteria3.equals(criteria4)) {
-                    JOptionPane.showMessageDialog(null,
-                            "Kriteria tidak boleh sama! Pilih kriteria yang berbeda untuk setiap prioritas.",
-                            "Validasi Error",
-                            JOptionPane.WARNING_MESSAGE);
-                    return; // Keluar dari method jika ada duplikasi
-                }
+                CriteriaBobotModel newData = new CriteriaBobotModel();
 
-                do {
-                    CriteriaModel newCriteria = new CriteriaModel();
-                    newCriteria.setCode("K" + n);
+                newData.setK1(criteria1);
+                newData.setK2(criteria2);
+                newData.setBobot(bobot);
 
-                    if (n == 1) {
-                        newCriteria.setName(criteria1);
-                        newCriteria.setPriority("Sangat Penting ke-1");
-                    } else if (n == 2) {
-                        newCriteria.setName(criteria2);
-                        newCriteria.setPriority("Penting ke-2");
-                    } else if (n == 3) {
-                        newCriteria.setName(criteria3);
-                        newCriteria.setPriority("Cukup Penting ke-3");
-                    } else {
-                        newCriteria.setName(criteria4);
-                        newCriteria.setPriority("Biasa ke-4");
-                    }
-
-                    criteriaDao.insertOne(newCriteria);
-
-                    n++;
-                } while (n <= 4);
+                criteriaBobotDao.update(newData);
 
                 JOptionPane.showMessageDialog(null, "Data Kriteria Berhasil Disimpan");
                 clearForm();
@@ -415,7 +316,7 @@ public class CriteriaData extends javax.swing.JPanel {
         } catch (Exception e) {
             if (e.getCause() instanceof java.sql.SQLIntegrityConstraintViolationException) {
                 JOptionPane.showMessageDialog(null,
-                        "Gagal menyimpan data: Kode kriteria sudah digunakan.\nSilakan ubah kode atau data kriteria.",
+                        "Gagal menyimpan data kriteria.",
                         "Duplikasi Data",
                         JOptionPane.WARNING_MESSAGE);
             } else {
@@ -427,92 +328,6 @@ public class CriteriaData extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
-    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
-        // TODO add your handling code here:
-        try {
-            int n = 1;
-
-            if (comboBoxCriteria1.getSelectedIndex() != 0 && comboBoxCriteria2.getSelectedIndex() != 0
-                    && comboBoxCriteria3.getSelectedIndex() != 0 && comboBoxCriteria4.getSelectedIndex() != 0 && code != null) {
-                // Validasi untuk memastikan tidak ada kriteria yang sama
-                String criteria1 = comboBoxCriteria1.getSelectedItem().toString();
-                String criteria2 = comboBoxCriteria2.getSelectedItem().toString();
-                String criteria3 = comboBoxCriteria3.getSelectedItem().toString();
-                String criteria4 = comboBoxCriteria4.getSelectedItem().toString();
-
-                // Cek duplikasi
-                if (criteria1.equals(criteria2) || criteria1.equals(criteria3) || criteria1.equals(criteria4)
-                        || criteria2.equals(criteria3) || criteria2.equals(criteria4) || criteria3.equals(criteria4)) {
-                    JOptionPane.showMessageDialog(null,
-                            "Kriteria tidak boleh sama! Pilih kriteria yang berbeda untuk setiap prioritas.",
-                            "Validasi Error",
-                            JOptionPane.WARNING_MESSAGE);
-                    return; // Keluar dari method jika ada duplikasi
-                }
-
-                do {
-                    CriteriaModel newCriteria = new CriteriaModel();
-                    newCriteria.setCode("K" + n);
-
-                    if (n == 1) {
-                        newCriteria.setName(criteria1);
-                        newCriteria.setPriority("Sangat Penting ke-1");
-                    } else if (n == 2) {
-                        newCriteria.setName(criteria2);
-                        newCriteria.setPriority("Penting ke-2");
-                    } else if (n == 3) {
-                        newCriteria.setName(criteria3);
-                        newCriteria.setPriority("Cukup Penting ke-3");
-                    } else {
-                        newCriteria.setName(criteria4);
-                        newCriteria.setPriority("Biasa ke-4");
-                    }
-
-                    criteriaDao.update(newCriteria);
-
-                    n++;
-                } while (n <= 4);
-
-                JOptionPane.showMessageDialog(null, "Data Kriteria Berhasil Diubah");
-                clearForm();
-                loadTable();
-                this.code = "";
-            } else {
-                JOptionPane.showMessageDialog(null, "Mohon isi semua kriteria yang ada!", "Error", ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data Gagal Diubah " + e);
-        }
-    }//GEN-LAST:event_buttonEditActionPerformed
-
-    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        // TODO add your handling code here:
-        try {
-            if (code != null) {
-                int ok = JOptionPane.showConfirmDialog(null, "Hapus Data Kriteria?", "Konfirmasi Dialog", JOptionPane.YES_NO_OPTION);
-                if (ok == 0) {
-                    criteriaDao.delete(ok);
-                    JOptionPane.showMessageDialog(null, "Data Kriteria Berhasil Dihapus ");
-                    loadTable();
-                    clearForm();
-                    this.code = null;
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data Kriteria Gagal Dihapus " + e);
-        }
-    }//GEN-LAST:event_buttonDeleteActionPerformed
-
-    private void buttonDeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDeleteMouseEntered
-        // TODO add your handling code here:
-        buttonDelete.setBackground(new Color(132, 0, 74));
-    }//GEN-LAST:event_buttonDeleteMouseEntered
-
-    private void buttonDeleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDeleteMouseExited
-        // TODO add your handling code here:
-        buttonDelete.setBackground(new Color(179, 30, 114));
-    }//GEN-LAST:event_buttonDeleteMouseExited
-
     private void buttonSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSaveMouseEntered
         // TODO add your handling code here:
         buttonSave.setBackground(new Color(250, 239, 245));
@@ -523,28 +338,13 @@ public class CriteriaData extends javax.swing.JPanel {
         buttonSave.setBackground(Color.white);
     }//GEN-LAST:event_buttonSaveMouseExited
 
-    private void buttonEditMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEditMouseEntered
-        // TODO add your handling code here:
-        buttonEdit.setBackground(new Color(250, 239, 245));
-    }//GEN-LAST:event_buttonEditMouseEntered
-
-    private void buttonEditMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEditMouseExited
-        // TODO add your handling code here:
-        buttonEdit.setBackground(Color.white);
-    }//GEN-LAST:event_buttonEditMouseExited
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonDelete;
-    private javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonSave;
+    private javax.swing.JComboBox<String> comboBoxBobot;
     private javax.swing.JComboBox<String> comboBoxCriteria1;
     private javax.swing.JComboBox<String> comboBoxCriteria2;
-    private javax.swing.JComboBox<String> comboBoxCriteria3;
-    private javax.swing.JComboBox<String> comboBoxCriteria4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;

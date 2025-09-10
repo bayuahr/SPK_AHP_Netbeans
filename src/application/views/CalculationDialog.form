@@ -78,77 +78,62 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jLabelSelectProduct" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane6" max="32767" attributes="0"/>
-                                              <Component id="jComboBoxProduct" alignment="0" pref="345" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Component id="jScrollPane13" max="32767" attributes="0"/>
+                                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabelSelectProduct" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jComboBoxProduct" alignment="0" min="-2" pref="345" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="mulaiHitung" min="-2" pref="87" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="reset" min="-2" pref="98" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="Simpan" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <Component id="jPanel6" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jPanel3" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
+                                          <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jPanel6" max="32767" attributes="0"/>
-                                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="mulaiHitung" linkSize="5" min="-2" pref="153" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="reset" min="-2" pref="153" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="Simpan" linkSize="5" min="-2" pref="153" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane2" min="-2" pref="669" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabelComparisonKriteria2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelComparisonKriteria1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelComparisonKriteria3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelComparisonKriteria4" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane7" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane5" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel21" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane4" alignment="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabelWeightKriteria2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelWeightKriteria1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelWeightKriteria3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelWeightKriteria4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel27" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane8" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane11" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane9" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane10" alignment="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabelComparisonKriteria2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelComparisonKriteria1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelComparisonKriteria3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelComparisonKriteria4" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane7" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane5" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jLabel21" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" alignment="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabelWeightKriteria2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelWeightKriteria1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelWeightKriteria3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelWeightKriteria4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel27" max="32767" attributes="0"/>
+                              <Component id="jScrollPane8" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane11" pref="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane9" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane10" alignment="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -157,41 +142,32 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="45" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="jLabelSelectProduct" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jComboBoxProduct" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane13" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Simpan" linkSize="6" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="reset" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                       <Component id="mulaiHitung" linkSize="6" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="reset" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="Simpan" linkSize="6" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jPanel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jPanel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane2" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -241,13 +217,9 @@
                                           <Component id="jScrollPane3" min="-2" pref="120" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="120" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -417,7 +389,7 @@
                                       <Component id="k4k4" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="30" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1138,7 +1110,7 @@
                                           <Component id="jLabel49" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel50" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="58" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="ciValue1" alignment="0" pref="127" max="32767" attributes="0"/>
                                           <Component id="nCriteria" alignment="0" max="32767" attributes="0"/>
@@ -1298,12 +1270,12 @@
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabelComparisonKriteria2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Kriteria Pengetahuan"/>
+                    <Property name="text" type="java.lang.String" value="Kriteria 2"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelComparisonKriteria1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Kriteria Kepemimpinan"/>
+                    <Property name="text" type="java.lang.String" value="Kriteria 1"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane4">
@@ -1329,7 +1301,7 @@
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabelComparisonKriteria3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Kriteria Kemampuan Teknis"/>
+                    <Property name="text" type="java.lang.String" value="Kriteria 3"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane5">
@@ -1355,7 +1327,7 @@
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabelComparisonKriteria4">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Kriteria Kemampuan Lanjutan"/>
+                    <Property name="text" type="java.lang.String" value="Kriteria 4"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane7">
@@ -1386,12 +1358,12 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelWeightKriteria1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Kriteria Kepemimpinan"/>
+                    <Property name="text" type="java.lang.String" value="Kriteria 1"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelWeightKriteria2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Kriteria Pengetahuan"/>
+                    <Property name="text" type="java.lang.String" value="Kriteria 2"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane8">
@@ -1417,7 +1389,7 @@
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabelWeightKriteria3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Kriteria Kemampuan Teknis"/>
+                    <Property name="text" type="java.lang.String" value="Kriteria 3"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane9">
@@ -1443,7 +1415,7 @@
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabelWeightKriteria4">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Kriteria Kemampuan Lanjutan"/>
+                    <Property name="text" type="java.lang.String" value="Kriteria 4"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane10">
@@ -1513,60 +1485,6 @@
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel22">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="List Kriteria"/>
-                  </Properties>
-                </Component>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane6">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JList" name="jListKriteria">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                          <StringArray count="2">
-                            <StringItem index="0" value="Kriteria 1"/>
-                            <StringItem index="1" value="Kriteria 2"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                  </SubComponents>
-                </Container>
-                <Component class="javax.swing.JLabel" name="jLabel24">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="List Alternatif"/>
-                  </Properties>
-                </Component>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane13">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JList" name="jListAlternative">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                          <StringArray count="2">
-                            <StringItem index="0" value="Alternatif 1"/>
-                            <StringItem index="1" value="Alternatif 2"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                  </SubComponents>
-                </Container>
               </SubComponents>
             </Container>
           </SubComponents>

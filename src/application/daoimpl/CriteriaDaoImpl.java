@@ -17,48 +17,49 @@ import java.util.List;
 
 /**
  *
- * @author mahasiswa unindra 
+ * @author mahasiswa unindra
  */
 public class CriteriaDaoImpl implements CriteriaDao {
+
     private final Connection dbConnection;
     private PreparedStatement pstmt;
     private ResultSet resultSet;
     private String query;
-    
-    public CriteriaDaoImpl(){
+
+    public CriteriaDaoImpl() {
         dbConnection = DatabaseUtil.getInstance().getConnection();
     }
-    
+
     @Override
     public int insertOne(CriteriaModel criteria) {
         try {
             query = "INSERT INTO criterias(code,name,priority) "
                     + "VALUES (?,?,?)";
-            
+
             pstmt = dbConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, criteria.getCode());
             pstmt.setString(2, criteria.getName());
             pstmt.setString(3, criteria.getPriority());
-            
+
             return pstmt.executeUpdate();
-	} catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException(e);
         } finally {
             closeStatement();
         }
     }
-    
+
     private void closeStatement() {
         try {
-            if(pstmt != null){
+            if (pstmt != null) {
                 pstmt.close();
                 pstmt = null;
             }
-            if(resultSet != null){
+            if (resultSet != null) {
                 resultSet.close();
                 resultSet = null;
-            }   
+            }
         } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException(e);
@@ -67,7 +68,7 @@ public class CriteriaDaoImpl implements CriteriaDao {
 
     @Override
     public List<CriteriaModel> findAll() {
-                try {
+        try {
             query = "SELECT * FROM criterias";
 
             pstmt = dbConnection.prepareStatement(query);
@@ -95,7 +96,7 @@ public class CriteriaDaoImpl implements CriteriaDao {
     @Override
     public int update(CriteriaModel criteria) {
         try {
-            query = "UPDATE criterias " 
+            query = "UPDATE criterias "
                     + "SET code = ?, name = ?, priority = ? "
                     + "WHERE code = ?";
 
@@ -104,13 +105,13 @@ public class CriteriaDaoImpl implements CriteriaDao {
             pstmt.setString(2, criteria.getName());
             pstmt.setString(3, criteria.getPriority());
             pstmt.setString(4, criteria.getCode());
-            
+
             return pstmt.executeUpdate();
-	} catch (SQLException e) {
+        } catch (SQLException e) {
             // e.printStackTrace();
             System.out.println(e);
             throw new RuntimeException(e);
-        }finally{
+        } finally {
             closeStatement();
         }
     }
@@ -120,15 +121,38 @@ public class CriteriaDaoImpl implements CriteriaDao {
         try {
             query = "DELETE FROM criterias";
             pstmt = dbConnection.prepareStatement(query);
-            
+
             return pstmt.executeUpdate();
-	} catch (SQLException e) {
+        } catch (SQLException e) {
             // e.printStackTrace();
             throw new RuntimeException(e);
-        }finally{
+        } finally {
             closeStatement();
         }
     }
 
-    
+    @Override
+    public List<String> findColumns() {
+        try {
+            query = "SELECT * FROM criterias";
+
+            pstmt = dbConnection.prepareStatement(query);
+            resultSet = pstmt.executeQuery();
+
+            List<String> hasil = new ArrayList<>();
+
+            while (resultSet.next()) {
+                String criteria = resultSet.getString("code");
+                hasil.add(criteria);
+            }
+
+            return hasil;
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            closeStatement();
+        }
+    }
+
 }

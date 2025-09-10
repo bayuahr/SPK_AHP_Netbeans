@@ -23,12 +23,11 @@ public class EvaluationDaoImpl implements EvaluationDao {
     @Override
     public int insertOne(EvaluationModel selection) {
         try {
-            query = "INSERT INTO evaluations (karyawan_id, admin_id, selection_name, created_at) VALUES (?, ?, ?, ?)";
+            query = "INSERT INTO evaluations (karyawan_id, admin_id, created_at) VALUES (?, ?, ?, ?)";
             pstmt = dbConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, selection.getKaryawan_id());
             pstmt.setInt(2, selection.getAdminId());
-            pstmt.setString(3, selection.getSelectionName());
-            pstmt.setTimestamp(4, selection.getCreatedAt());
+            pstmt.setTimestamp(3, selection.getCreatedAt());
 
             int affectedRows = pstmt.executeUpdate();
 
@@ -68,7 +67,6 @@ public class EvaluationDaoImpl implements EvaluationDao {
                 s.setId(resultSet.getInt("id"));
                 s.setKaryawan_id(resultSet.getInt("karyawan_id"));
                 s.setAdminId(resultSet.getInt("admin_id"));
-                s.setSelectionName(resultSet.getString("karyawan_id"));
                 s.setCreatedAt(resultSet.getTimestamp("created_at"));
                 s.setAdminId(resultSet.getInt("admin_id"));
 
