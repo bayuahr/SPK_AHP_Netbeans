@@ -24,15 +24,11 @@ public class EvaluationTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         switch (column) {
-            case 0:
-                return "No";
             case 1:
-                return "Seleksi ID";
-            case 2:
                 return "Nama Karyawan";
-            case 3:
+            case 0:
                 return "Kode Karyawan";
-            case 4:
+            case 2:
                 return "Admin Id";
             case 5:
                 return "Dibuat Pada";

@@ -101,7 +101,7 @@
                 <textElement textAlignment="Center">
                     <font fontName="Times New Roman" size="16" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Laporan Data Akun]]></text>
+                <text><![CDATA[Laporan Data Perhitungan]]></text>
             </staticText>
         </band>
     </columnHeader>

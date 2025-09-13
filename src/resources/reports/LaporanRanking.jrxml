@@ -37,15 +37,21 @@
         <property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
         <parameter name="EVALUATION_ID" class="java.lang.Integer"/>
         <queryString language="SQL">
-			<![CDATA[SELECT r.rank, r.score
+			<![CDATA[SELECT r.rank, b.nama,r.score
             FROM results r 
             LEFT JOIN alternatives a ON r.alternative_id = a.id 
+            LEFT JOIN employees b on b.id = a.karyawan_id
             WHERE r.evaluation_id = $P{EVALUATION_ID}
             ORDER BY r.rank ASC]]>
         </queryString>
         <field name="rank" class="java.lang.Integer">
             <property name="com.jaspersoft.studio.field.name" value="rank"/>
             <property name="com.jaspersoft.studio.field.label" value="rank"/>
+            <property name="com.jaspersoft.studio.field.tree.path" value="results"/>
+        </field>
+                <field name="nama" class="java.lang.String">
+            <property name="com.jaspersoft.studio.field.name" value="nama"/>
+            <property name="com.jaspersoft.studio.field.label" value="nama"/>
             <property name="com.jaspersoft.studio.field.tree.path" value="results"/>
         </field>
         <field name="score" class="java.lang.Double">
@@ -140,6 +146,26 @@
                                     <font fontName="Times New Roman"/>
                                 </textElement>
                                 <textFieldExpression><![CDATA[$F{rank}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+                    <jr:column width="125" uuid="ab61c010-46b9-4ece-967c-682255b03499">
+                        <jr:tableHeader style="Table_TH" height="30">
+                            <staticText>
+                                <reportElement x="0" y="0" width="125" height="30" uuid="8b5599d2-84af-4437-8e48-1dad9992003d"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman" isBold="true"/>
+                                </textElement>
+                                <text><![CDATA[Nama]]></text>
+                            </staticText>
+                        </jr:tableHeader>
+                        <jr:detailCell style="Table_TD" height="30">
+                            <textField>
+                                <reportElement x="0" y="0" width="125" height="30" uuid="6f4039a4-4b03-4d17-afe6-f5e7dd51391f"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font fontName="Times New Roman"/>
+                                </textElement>
+                                <textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
                             </textField>
                         </jr:detailCell>
                     </jr:column>

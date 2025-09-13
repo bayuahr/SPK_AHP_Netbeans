@@ -4,10 +4,13 @@
  */
 package application.views;
 
+import application.daoimpl.ResultDaoImpl;
+import application.models.ResultModel;
 import application.utils.DatabaseUtil;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -308,8 +311,24 @@ public class ReportView extends javax.swing.JPanel {
     }//GEN-LAST:event_jLaporanAlternatifButtonActionPerformed
 
     private void jLaporanPerhitunganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLaporanPerhitunganActionPerformed
+
         try {
-            String templateName = "LaporanDataPerhitungan.jrxml";
+
+            // Get results data
+            List<ResultModel> results = new ResultDaoImpl().findByEvaluationId();
+            if (results.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tidak ada data hasil untuk diekspor.");
+                return;
+            }
+
+            // Get product name from the first result
+            String productName = "Karyawan Tidak Diketahui";
+            if (!results.isEmpty() && results.get(0).getAlternative() != null
+                    && results.get(0).getAlternative().getK() != null) {
+                productName = results.get(0).getAlternative().getK().getNama();
+            }
+
+            String templateName = "LaporanRanking.jrxml";
             InputStream reportStream = getClass().getResourceAsStream("/resources/reports/" + templateName);
 
             if (reportStream == null) {
@@ -318,16 +337,20 @@ public class ReportView extends javax.swing.JPanel {
             }
 
             JasperDesign jd = JRXmlLoader.load(reportStream);
+
             Connection dbConnection = DatabaseUtil.getInstance().getConnection();
             JasperReport jr = JasperCompileManager.compileReport(jd);
 
             HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("PATH", "resources/images/");
+            parameters.put("PRODUCT_NAME", productName);
+            parameters.put("EVALUATION_ID", 1);
 
             JasperPrint jp = JasperFillManager.fillReport(jr, parameters, dbConnection);
             JasperViewer.viewReport(jp, false);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(this, "Gagal mengekspor laporan: " + e.getMessage());
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jLaporanPerhitunganActionPerformed
 

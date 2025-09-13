@@ -59,7 +59,7 @@ public class ResultDetailDialog extends javax.swing.JDialog {
 
     public void setDataTabel(int evaluationId) {
         currentEvaluationId = evaluationId;
-        List<ResultModel> results = resultDao.findByEvaluationId(evaluationId);
+        List<ResultModel> results = resultDao.findByEvaluationId();
         ResultTableModel resultTableModel = new ResultTableModel(results);
 
         tableResult.setModel(resultTableModel);
@@ -207,14 +207,9 @@ public class ResultDetailDialog extends javax.swing.JDialog {
 
     private void buttonExportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonExportMouseClicked
         try {
-            // Check if there are results to export
-            if (currentEvaluationId == null) {
-                JOptionPane.showMessageDialog(this, "Tidak ada data untuk diekspor.");
-                return;
-            }
 
             // Get results data
-            List<ResultModel> results = resultDao.findByEvaluationId(currentEvaluationId);
+            List<ResultModel> results = resultDao.findByEvaluationId();
             if (results.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Tidak ada data hasil untuk diekspor.");
                 return;
@@ -243,7 +238,7 @@ public class ResultDetailDialog extends javax.swing.JDialog {
             HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("PATH", "resources/images/");
             parameters.put("PRODUCT_NAME", productName);
-            parameters.put("EVALUATION_ID", currentEvaluationId);
+            parameters.put("EVALUATION_ID", 1);
 
             JasperPrint jp = JasperFillManager.fillReport(jr, parameters, dbConnection);
 

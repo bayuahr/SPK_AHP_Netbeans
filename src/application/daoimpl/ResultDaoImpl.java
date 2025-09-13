@@ -39,7 +39,7 @@ public class ResultDaoImpl implements ResultDao {
     }
 
     @Override
-    public List<ResultModel> findByEvaluationId(int evaluationId) {
+    public List<ResultModel> findByEvaluationId() {
         try {
             query = "SELECT r.*, "
                     + "a.id as alt_id, a.karyawan_id, "
@@ -48,18 +48,16 @@ public class ResultDaoImpl implements ResultDao {
                     + "FROM results r "
                     + "LEFT JOIN alternatives a ON r.alternative_id = a.id "
                     + "LEFT JOIN employees p ON a.karyawan_id = p.id "
-                    + "WHERE r.evaluation_id = ? "
                     + "ORDER BY r.rank ASC";
 
             pstmt = dbConnection.prepareStatement(query);
-            pstmt.setInt(1, evaluationId);
             resultSet = pstmt.executeQuery();
 
             List<ResultModel> results = new ArrayList<>();
             while (resultSet.next()) {
                 ResultModel result = new ResultModel();
                 result.setId(resultSet.getInt("id"));
-                result.setEvaluationId(resultSet.getInt("evaluation_id"));
+                result.setEvaluationId(1);
                 result.setAlternativeId(resultSet.getInt("alternative_id"));
                 result.setScore(resultSet.getDouble("score"));
                 result.setRank(resultSet.getInt("rank"));
@@ -97,11 +95,10 @@ public class ResultDaoImpl implements ResultDao {
     }
 
     @Override
-    public int deleteByEvaluationId(int evaluationId) {
+    public int deleteByEvaluationId() {
         try {
-            query = "DELETE FROM results WHERE evaluation_id = ?";
+            query = "DELETE FROM results";
             pstmt = dbConnection.prepareStatement(query);
-            pstmt.setInt(1, evaluationId);
             return pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting results by evaluation_id", e);

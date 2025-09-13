@@ -1827,7 +1827,7 @@ public class CalculationDialog extends javax.swing.JDialog {
 
         try {
             System.out.println("AlternativeWeightModel.length: " + this.alternativeWeightModel.size());
-
+            new ResultDaoImpl().deleteByEvaluationId();
 //            // Step 1: Save to EvaluationDao
 //            EvaluationModel evaluation = new EvaluationModel();
 //            evaluation.setKaryawan_id(productId);

@@ -6,12 +6,26 @@ package application.views;
 
 import application.dao.EvaluationDao;
 import application.daoimpl.EvaluationDaoImpl;
+import application.daoimpl.ResultDaoImpl;
 import application.models.EvaluationModel;
 import application.models.EvaluationTableModel;
+import application.models.ResultModel;
+import application.models.ResultTableModel;
+import application.utils.DatabaseUtil;
 import java.awt.Color;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -33,10 +47,10 @@ public class EvaluationView extends javax.swing.JPanel {
     }
 
     public void loadTable() {
-        List<EvaluationModel> evaluations = this.evaluationDao.findAll();
-        EvaluationTableModel evaluationTableModel = new EvaluationTableModel(evaluations);
+        List<ResultModel> results = new ResultDaoImpl().findByEvaluationId();
+        ResultTableModel modelTable = new ResultTableModel(results);
 
-        tableRanking.setModel(evaluationTableModel);
+        tableRanking.setModel(modelTable);
 
 //        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableRanking.getModel());
 //        tableRanking.setRowSorter(sorter);
@@ -62,12 +76,8 @@ public class EvaluationView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableRanking = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         buttonDetail = new javax.swing.JButton();
         tombolLihatPerhitunganAHP = new javax.swing.JButton();
-        buttonDelete1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(245, 247, 250));
 
@@ -106,40 +116,20 @@ public class EvaluationView extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("- Untuk melihat ranking, pilih item pada tabel dan klik tombol \"Lihat detail\"");
-
-        jLabel3.setText("Catatan : ");
-
-        jLabel4.setText("- Hapus hasil penilaian dengan memilih item pada tabel dan klik tombol \"Hapus\" ");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addContainerGap(99, Short.MAX_VALUE))
+            .addGap(0, 539, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(0, 53, Short.MAX_VALUE))
+            .addGap(0, 113, Short.MAX_VALUE)
         );
 
         buttonDetail.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         buttonDetail.setForeground(new java.awt.Color(0, 120, 218));
-        buttonDetail.setText("Lihat Detail");
+        buttonDetail.setText("Ekspor PDF");
         buttonDetail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         buttonDetail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -157,7 +147,7 @@ public class EvaluationView extends javax.swing.JPanel {
 
         tombolLihatPerhitunganAHP.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         tombolLihatPerhitunganAHP.setForeground(new java.awt.Color(11, 91, 179));
-        tombolLihatPerhitunganAHP.setText("Mulai Penilaian Alternatif Metode AHP");
+        tombolLihatPerhitunganAHP.setText("Mulai Penilaian Karyawan Metode AHP");
         tombolLihatPerhitunganAHP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(202, 210, 226)));
         tombolLihatPerhitunganAHP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -173,24 +163,6 @@ public class EvaluationView extends javax.swing.JPanel {
             }
         });
 
-        buttonDelete1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        buttonDelete1.setForeground(new java.awt.Color(204, 0, 51));
-        buttonDelete1.setText("Hapus");
-        buttonDelete1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        buttonDelete1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonDelete1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonDelete1MouseExited(evt);
-            }
-        });
-        buttonDelete1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonDelete1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -202,11 +174,8 @@ public class EvaluationView extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(buttonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                        .addComponent(buttonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(tombolLihatPerhitunganAHP, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -222,9 +191,7 @@ public class EvaluationView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buttonDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(buttonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -271,37 +238,45 @@ public class EvaluationView extends javax.swing.JPanel {
     }//GEN-LAST:event_tableRankingMouseClicked
 
     private void buttonDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDetailActionPerformed
-        int selectedRow = tableRanking.getSelectedRow();
-
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Pilih data evaluasi terlebih dahulu.");
-            return;
-        }
 
         try {
-            // Get evaluation ID and product name from the selected row
-            TableModel model = tableRanking.getModel();
-            Object idValue = model.getValueAt(selectedRow, 1); // Assuming ID is in column 0
-            Object productNameValue = model.getValueAt(selectedRow, 3); // Assuming product name is in column 2, adjust as needed
 
-            if (idValue == null) {
-                JOptionPane.showMessageDialog(this, "Data evaluasi tidak valid.");
+            // Get results data
+            List<ResultModel> results = new ResultDaoImpl().findByEvaluationId();
+            if (results.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Tidak ada data hasil untuk diekspor.");
                 return;
             }
 
-            int evaluationId = Integer.parseInt(idValue.toString());
-            String productName = productNameValue != null ? productNameValue.toString() : "Karyawan";
+            // Get product name from the first result
+            String productName = "Karyawan Tidak Diketahui";
+            if (!results.isEmpty() && results.get(0).getAlternative() != null
+                    && results.get(0).getAlternative().getK() != null) {
+                productName = results.get(0).getAlternative().getK().getNama();
+            }
 
-            // Create and configure the dialog
-            ResultDetailDialog dialog = new ResultDetailDialog(null, true);
-            dialog.setTitleFrame("Hasil Penilaian " + productName);
-            dialog.setDataTabel(evaluationId);
-            dialog.setVisible(true);
+            String templateName = "LaporanRanking.jrxml";
+            InputStream reportStream = getClass().getResourceAsStream("/resources/reports/" + templateName);
 
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Format ID evaluasi tidak valid.");
+            if (reportStream == null) {
+                JOptionPane.showMessageDialog(this, "Template laporan tidak ditemukan: " + templateName);
+                return;
+            }
+
+            JasperDesign jd = JRXmlLoader.load(reportStream);
+
+            Connection dbConnection = DatabaseUtil.getInstance().getConnection();
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+
+            HashMap<String, Object> parameters = new HashMap<>();
+            parameters.put("PATH", "resources/images/");
+            parameters.put("PRODUCT_NAME", productName);
+            parameters.put("EVALUATION_ID", 1);
+
+            JasperPrint jp = JasperFillManager.fillReport(jr, parameters, dbConnection);
+            JasperViewer.viewReport(jp, false);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal menampilkan detail hasil: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Gagal mengekspor laporan: " + e.getMessage());
             e.printStackTrace();
         }
     }//GEN-LAST:event_buttonDetailActionPerformed
@@ -334,35 +309,9 @@ public class EvaluationView extends javax.swing.JPanel {
         tombolLihatPerhitunganAHP.setBackground(Color.white);
     }//GEN-LAST:event_tombolLihatPerhitunganAHPMouseExited
 
-    private void buttonDelete1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDelete1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonDelete1MouseEntered
-
-    private void buttonDelete1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDelete1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonDelete1MouseExited
-
-    private void buttonDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDelete1ActionPerformed
-        // TODO add your handling code here:
-        try {
-            int ok = JOptionPane.showConfirmDialog(null, "Hapus Semua Data", "Konfirmasi Dialog", JOptionPane.YES_NO_OPTION);
-            if (ok == 0) {
-                evaluationDao.delete(this.id);
-                JOptionPane.showMessageDialog(null, "Data Berhasil diHapus ");
-                loadTable();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data Gagal diHapus " + e);
-        }
-    }//GEN-LAST:event_buttonDelete1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonDelete1;
     private javax.swing.JButton buttonDetail;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
